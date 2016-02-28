@@ -22,7 +22,7 @@ body {
     display: inline-block;
 }
 .display_text {
-    width: 90%;
+    width: 80%;
     text-align: center;
     background: #FFF;
     color: #000;
@@ -32,6 +32,7 @@ body {
 }
 .vote_wrap {
     width: 9.6%;
+    vertical-align: bottom;
 }
 .vote_wrap div {
     display: block;
@@ -71,4 +72,19 @@ body {
 }
 #input_text_label {
     font-size: 40px;
+}
+
+.vote_score {
+    width: 10%;
+    height: 75px;
+    background: #000;
+    color: #FFF;
+    line-height: 75px;
+    text-align: center;
+}
+.green_score {
+    color: green;
+}
+.red_score {
+    color: red;
 }
