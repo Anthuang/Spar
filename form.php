@@ -30,7 +30,7 @@ if ($num > 0) {
 <html>
 <head>
     <title>Form</title>
-    <link rel="stylesheet" type="text/css" href="form.css">
+    <link rel="stylesheet" type="text/css" href="css/form.css">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 </head>
 <body>
