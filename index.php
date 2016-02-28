@@ -2,16 +2,17 @@
 
 require_once "utility.php";
 
-$first_name = $rest_name = $statement = $html = "";
+$first_name = $rest_name = $statement = $path = $html = "";
 
 $result = queryMysql('SELECT * FROM `Profile` GROUP BY `Name`');
 $num = $result->num_rows;
 if ($num > 0) {
 	$rand_num = rand(0, $num - 1);
-	$result2 = queryMysql('SELECT `Name`, `Statement`, MAX(Score) FROM `Profile` GROUP BY `Name` LIMIT '.$rand_num.',1');
+	$result2 = queryMysql('SELECT `Name`, `Statement`, MAX(Score), `ImageLink` FROM `Profile` GROUP BY `Name` LIMIT '.$rand_num.',1');
 	$row2 = $result2->fetch_array(MYSQLI_ASSOC);
 	$name = $row2['Name'];
 	$statement = $row2['Statement'];
+	$path = $row2['ImageLink'];
 	$name_array = explode(" ", $name);
 	$first_name = $name_array[0];
 	$rest_name = "";
@@ -38,6 +39,7 @@ if ($num > 0) {
     <title>The Hate Generator</title>
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <img src=<?php echo $path; ?>>
     <script type="text/javascript" src="src/jquery.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
 </head>
