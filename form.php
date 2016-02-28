@@ -20,7 +20,7 @@ if ($num > 0) {
         $score = $row['Score'];
         $html .= '<div class="display_wrap"><div class="display_text">';
         $html .= $statement;
-        $html .= '</div><div class="vote_wrap"><div class="vote_up">Up</div><div class="vote_down">Do</div></div></div>';
+        $html .= '</div><div class="vote_wrap"><div class="vote_up">&#128077;</div><div class="vote_down">&#128078;</div></div><div class="vote_score">0</div></div>';
     }
 }
 

@@ -39,11 +39,11 @@ if ($num > 0) {
     <title>The Hate Generator</title>
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-    <img src=<?php echo $path; ?>>
     <script type="text/javascript" src="src/jquery.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
 </head>
 <body>
+    <img id="main_background" src=<?php echo $path; ?>>
     <?php echo $html; ?>
     <a href="form.php"><button id="write_button">write your own</button></a>
     <input type="hidden" id="id_num_statements" value=<?php echo $num3; ?>>
