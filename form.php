@@ -10,7 +10,7 @@ if (isset($_GET['name']) && !empty($_GET['name'])) {
     $name = "Donald Trump";
 }
 
-$html = "";
+$html = $img = "";
 
 $result = queryMysql('SELECT * FROM `Profile` WHERE `Name`="'.$name.'" ORDER BY `Score` DESC');
 $num = $result->num_rows;
@@ -18,6 +18,7 @@ if ($num > 0) {
     for ($j = 0; $j < $num; $j++) {
         $row = $result->fetch_array(MYSQLI_ASSOC);
         $id = $row['ID'];
+        $img = $row['ImageLink'];
         $name = $row['Name'];
         $statement = $row['Statement'];
         $score = $row['Score'];
@@ -52,12 +53,24 @@ if ($num > 0) {
     <script type="text/javascript" src="js/form.js"></script>
 </head>
 <body>
-    <div id="outer_wrap">
-        <div id="first_display" class="display_wrap">
+    <a href="index.php"><button id="return_home">Back</button></a>
+    <div id="first_display" class="display_wrap">
+        <form action="form.php" method="get">
+            <input id="set_image_input" type="text"></input>
+            <button id="set_image">Set image</button>
+        </form>
+        <img id="form_photo" src="<?php echo $img; ?>">
+        <div>
             <label for="input_text" id="input_text_label">In 3 words, <?php echo $name; ?> is</label>
             <input id="input_text" type="text"></input><button id="input_submit">enter</button>
         </div>
+    </div>
+    <div id="outer_wrap">
         <div id="id_vote_boxes">
+            <div id="category_wrap">
+                <button class="category_button" id="category_hot">hot</button>
+                <button class="category_button" id="category_recent">recent</button>
+            </div>
             <?php echo $html; ?>
         </div>
     </div>

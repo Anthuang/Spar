@@ -1,6 +1,5 @@
 html {
-    background: url(doge.jpg) no-repeat 50% 50% fixed;
-    background-size: cover;
+    background: #BC4642;
     overflow-x: hidden;
     font-family: "Montserrat";
     width: 100%;
@@ -9,6 +8,10 @@ html {
 }
 body {
     margin: 0;
+    height: 100%;
+}
+button {
+    outline: none;
 }
 #outer_wrap {
     width: 80%;
@@ -41,9 +44,60 @@ body {
     text-align: center;
     line-height: 37.3px;
 }
+.vote_wrap div:hover {
+    background: #333;
+}
 
+#return_home {
+    position: absolute;
+    z-index: 2;
+    top: 1%;
+    left: 1%;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #FFF;
+    background: #FFF;
+    transition: all 0.2s linear 0s;
+}
+#return_home:hover {
+    background: #000;
+    color: #FFF;
+    border: 1px solid #FFF;
+}
+
+#set_image {
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #FFF;
+    background: #FFF;
+    transition: all 0.2s linear 0s;
+}
+#set_image:hover {
+    background: #000;
+    color: #FFF;
+    border: 1px solid #FFF;
+}
+#set_image_input {
+    position: absolute;
+    top: 40px;
+    right: 1%;
+}
+
+#form_photo {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 0;
+    height: 100%;
+}
 #input_text {
-    width: 85%;
+    width:60%;
     background: #FFF;
     color: #000;
     height: 50px;
@@ -54,6 +108,8 @@ body {
     outline: none;
     padding: 0 2.5%;
     font-size: 30px;
+    margin-top: 20px;
+    opacity: 0.9;
 }
 #input_submit {
     padding: 0;
@@ -63,15 +119,30 @@ body {
     background: #000;
     color: #FFF;
     font-size: 15px;
+    transition: all 0.2s linear 0s;
+}
+#input_submit:hover {
+    background: #FFF;
+    color: #000;
 }
 
 #first_display {
+    position: relative;
     text-align: center;
-    margin-top: 10%;
-    margin-bottom: 10%;
+    background: #222;
+    margin: 0;
+    height: 50%;
 }
 #input_text_label {
     font-size: 40px;
+    text-shadow: 2px 2px 5px #000;
+}
+#first_display > div {
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
 }
 
 .vote_score {
@@ -87,4 +158,22 @@ body {
 }
 .red_score {
     color: red;
+}
+
+#category_wrap {
+    margin-top: 2.5%;
+    text-align: center;
+}
+.category_button {
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #FFF;
+    background: #FFF;
+    transition: all 0.2s linear 0s;
+}
+.category_button:hover {
+    background: #000;
+    color: #FFF;
+    border: 1px solid #FFF;
 }
