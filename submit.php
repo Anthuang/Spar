@@ -32,7 +32,18 @@ if (isset($_POST['id']) && !empty($_POST['id']) && isset($_POST['name']) && !emp
 	}
 }
 
-$result = queryMysql('SELECT * FROM `Profile` WHERE `Name`="'.$name.'" ORDER BY `Score` DESC');
+if (isset($_SESSION["sort"])) {
+    $sort = $_SESSION["sort"];
+} else {
+    $_SESSION["sort"] = "new";
+    $sort = "new";
+}
+
+if ($sort == "new") {
+    $result = queryMysql('SELECT * FROM `Profile` WHERE `Name`="'.$name.'" ORDER BY `TableDate`, `TableTime` DESC');
+} else {
+    $result = queryMysql('SELECT * FROM `Profile` WHERE `Name`="'.$name.'" ORDER BY `Score` DESC');
+}
 $num = $result->num_rows;
 if ($num > 0) {
     for ($j = 0; $j < $num; $j++) {
@@ -44,11 +55,11 @@ if ($num > 0) {
         $html .= '<div class="display_wrap"><div class="display_text">';
         $html .= $statement;
         if (isset($_SESSION[strval($id)."f"]) && $_SESSION[strval($id)."f"]) {
-        	$html .= '</div><div class="vote_wrap" value='.$id.'><div class="vote_up" style="background-color: green;" value="'.$name.'">&#128077;</div><div class="vote_down" value="'.$name.'">&#128078;</div></div>';
+            $html .= '</div><div class="vote_wrap" value='.$id.'><div class="vote_up" style="background-color: green;" value="'.$name.'">&#128077;</div><div class="vote_down" value="'.$name.'">&#128078;</div></div>';
         } else if (isset($_SESSION[strval($id)."f"]) && !$_SESSION[strval($id)."f"]) {
-        	$html .= '</div><div class="vote_wrap" value='.$id.'><div class="vote_up" value="'.$name.'">&#128077;</div><div class="vote_down" style="background-color: red;" value="'.$name.'">&#128078;</div></div>';
+            $html .= '</div><div class="vote_wrap" value='.$id.'><div class="vote_up" value="'.$name.'">&#128077;</div><div class="vote_down" style="background-color: red;" value="'.$name.'">&#128078;</div></div>';
         } else {
-        	$html .= '</div><div class="vote_wrap" value='.$id.'><div class="vote_up" value="'.$name.'">&#128077;</div><div class="vote_down" value="'.$name.'">&#128078;</div></div>';
+            $html .= '</div><div class="vote_wrap" value='.$id.'><div class="vote_up" value="'.$name.'">&#128077;</div><div class="vote_down" value="'.$name.'">&#128078;</div></div>';
         }
         if ($score > 0) {
             $html .= '<div class="vote_score green_score">'.$score.'</div></div>';

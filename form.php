@@ -4,21 +4,68 @@ require_once "utility.php";
 
 session_start();
 
+$html = $img = "";
+
 if (isset($_GET['name']) && !empty($_GET['name'])) {
     $name = $_GET['name'];
 } else {
     $name = "Donald Trump";
 }
 
-$html = $img = "";
+if (isset($_POST['name']) && !empty($_POST['name']) && isset($_POST['statement']) && !empty($_POST['statement'])) {
+    $name = $_POST['name'];
+    $statement = $_POST['statement'];
+    $result = queryMysql('SELECT * FROM `Profile` WHERE `Name`="'.$name.'"');
+    $num = $result->num_rows;
+    if ($num == 0) {
+        queryMysql('INSERT INTO `Profile` VALUES (null, "'.$name.'", "'.$statement.'", 0, "", CURDATE(), CURTIME())');
+    }
+}
 
-$result = queryMysql('SELECT * FROM `Profile` WHERE `Name`="'.$name.'" ORDER BY `Score` DESC');
+$img_result = queryMysql('SELECT * FROM `Profile` WHERE `Name`="'.$name.'"');
+$img_num = $img_result->num_rows;
+if ($img_num > 0) {
+    $img_row = $img_result->fetch_array(MYSQLI_ASSOC);
+    $img = $img_row['ImageLink'];
+}
+
+if (isset($_GET['set_image']) && $_GET['set_image'] == 1 && isset($_GET['image']) && !empty($_GET['image'])) {
+    $img = $_GET['image'];
+    queryMysql('UPDATE `Profile` SET `ImageLink`="'.$img.'" WHERE `Name`="'.$name.'"');
+}
+
+if (isset($_GET['statement']) && !empty($_GET['statement'])) {
+    $statement = $_GET['statement'];
+    $statement_array = explode(" ", $statement);
+    if (sizeof($statement_array) == 3) {
+        $result = queryMysql('SELECT * FROM `Profile` WHERE `Name`="'.$name.'" AND `Statement`="'.$statement.'"');
+        $num = $result->num_rows;
+        if ($num == 0) {
+            queryMysql('INSERT INTO `Profile` VALUES (null, "'.$name.'", "'.$statement.'", 0, "'.$img.'", CURDATE(), CURTIME())');
+        }
+    }
+}
+
+if (isset($_GET['sort']) && !empty($_GET['sort'])) {
+    $_SESSION['sort'] = $_GET['sort'];
+    $sort = $_GET['sort'];
+} else if (isset($_SESSION['sort'])) {
+    $sort = $_SESSION["sort"];
+} else {
+    $_SESSION['sort'] = "new";
+    $sort = "new";
+}
+
+if ($sort == "new") {
+    $result = queryMysql('SELECT * FROM `Profile` WHERE `Name`="'.$name.'" ORDER BY `TableDate`, `TableTime` DESC');
+} else {
+    $result = queryMysql('SELECT * FROM `Profile` WHERE `Name`="'.$name.'" ORDER BY `Score` DESC');
+}
 $num = $result->num_rows;
 if ($num > 0) {
     for ($j = 0; $j < $num; $j++) {
         $row = $result->fetch_array(MYSQLI_ASSOC);
         $id = $row['ID'];
-        $img = $row['ImageLink'];
         $name = $row['Name'];
         $statement = $row['Statement'];
         $score = $row['Score'];
@@ -53,23 +100,53 @@ if ($num > 0) {
     <script type="text/javascript" src="js/form.js"></script>
 </head>
 <body>
-    <a href="index.php"><button id="return_home">Back</button></a>
+    <form action="index.php" method="post">
+        <input name="name" type="hidden" value="<?php echo $name; ?>">
+        <button id="return_home">Back</button>
+    </form>
     <div id="first_display" class="display_wrap">
         <form action="form.php" method="get">
-            <input id="set_image_input" type="text"></input>
-            <button id="set_image">Set image</button>
+            <input type="hidden" name="name" value="<?php echo $name; ?>">
+            <input name="image" id="set_image_input" placeholder="enter image url here" type="text"></input>
+            <button name="set_image" id="set_image" value=1>Set image</button>
         </form>
         <img id="form_photo" src="<?php echo $img; ?>">
         <div>
             <label for="input_text" id="input_text_label">In 3 words, <?php echo $name; ?> is</label>
-            <input id="input_text" type="text"></input><button id="input_submit">enter</button>
+            <form action="form.php" method="get">
+                <input id="input_text" name="statement" placeholder="enter a three word statement" style="text-align: center;" type="text"></input>
+                <input type="hidden" name="name" value="<?php echo $name; ?>">
+                <button id="input_submit">enter</button>
+            </form>
         </div>
     </div>
     <div id="outer_wrap">
         <div id="id_vote_boxes">
             <div id="category_wrap">
-                <button class="category_button" id="category_hot">hot</button>
-                <button class="category_button" id="category_recent">recent</button>
+                <form action="form.php" method="get">
+                    <input type="hidden" name="name" value="<?php echo $name; ?>">
+                    <?php
+
+                    if ($sort == "new") {
+                        echo '<button class="category_button" id="category_hot" name="sort" value="score">hot</button>';
+                    } else {
+                        echo '<button class="category_button category_pressed" id="category_hot" name="sort" value="score">hot</button>';
+                    }
+
+                    ?>
+                </form>
+                <form action="form.php" method="get">
+                    <input type="hidden" name="name" value="<?php echo $name; ?>">
+                    <?php
+
+                    if ($sort == "new") {
+                        echo '<button class="category_button category_pressed" id="category_recent" name="sort" value="new">recent</button>';
+                    } else {
+                        echo '<button class="category_button" id="category_hot" name="sort" value="new">recent</button>';
+                    }
+
+                    ?>
+                </form>
             </div>
             <?php echo $html; ?>
         </div>

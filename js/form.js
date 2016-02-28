@@ -8,7 +8,6 @@ $(document).ready(function() {
             .done(function (data) {
             $("#id_vote_boxes").html(data);
         });
-        $(this).addClass("green_background");
 	})
 
 	$(document.body).on('click', '.vote_down' ,function() {
@@ -16,7 +15,6 @@ $(document).ready(function() {
 		$("#id_name").attr("value", $(this).attr("value"));
 		$("#id_score").attr("value", $(this).parent().siblings(".vote_score").html());
 		$("#id_up").attr("value", 0);
-		$(this).addClass("red_background");
 		$.post("submit.php", $("#form_vote").serialize())
             .done(function (data) {
             $("#id_vote_boxes").html(data);
