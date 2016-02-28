@@ -38,18 +38,33 @@ if ($num > 0) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>The Hate Generator</title>
+    <title>In Three Words</title>
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="src/jquery.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
 </head>
 <body>
-    <img id="main_background" src=<?php echo $path; ?>>
-    <?php echo $html; ?>
-    <form action="form.php" method="get">
-    	<button name="name" value="<?php echo $name ?>" id="write_button">write your own</button>
+    <form id="create_new">
+        <span>Create new</span>
+        <label>Name: </label><input type="text"></input><br>
+        <label>Three words: </label><input type="text"></input>
+        <button type="button" class="write_button" id="close_create_new">close</button>
     </form>
-    <input type="hidden" id="id_num_statements" value=<?php echo $num3; ?>>
+    <div id="main_wrap">
+        <img id="main_background" src=<?php echo $path; ?>>
+        <?php echo $html; ?>
+        <form action="form.php" method="get">
+        	<button type="button" name="name" class="write_button" id="write_own">write your own</button>
+            <button name="name" value="<?php echo $name ?>" class="write_button">vote</button>
+            <button type="button" name="name" class="write_button" id="help_button">help</button>
+        </form>
+        <input type="hidden" id="id_num_statements" value=<?php echo $num3; ?>>
+    </div>
+    <div id="help_wrap">
+        <div>This is how you use the website.
+                You first take all your money, and you put it in my bank account.</div>
+        <button class="write_button" id="help_return">return</button>
+    </div>
 </body>
 </html>
