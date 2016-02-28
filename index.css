@@ -1,0 +1,31 @@
+html {
+    overflow: hidden;
+    background: #222;
+}
+#text_wrap {
+    font-family: "Montserrat";
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 80%;
+    margin: 5% 10% 0 10%;
+    font-size: 75px;
+    color: #FFF;
+}
+#flow_text {
+    word-wrap: break-word;
+}
+
+#blinker{
+    height: 100%;
+    display: inline-block;
+    -webkit-animation: TextBlink 1s infinite;
+}
+@-webkit-keyframes TextBlink {
+    0% { opacity: 1.0; }
+    20% { opacity: 0.0; }
+    40% { opacity: 0.0; }
+    60% { opacity: 0.0; }
+    80% { opacity: 1.0; }
+    100% { opacity: 1.0; }
+}
