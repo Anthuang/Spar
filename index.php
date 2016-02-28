@@ -48,7 +48,8 @@ if ($num > 0) {
     <img id="main_background" src=<?php echo $path; ?>>
     <?php echo $html; ?>
     <form action="form.php" method="get">
-    	<button name="name" value="<?php echo $name ?>" id="write_button">write your own</button>
+    	<button name="name" value="<?php echo $name ?>" class="write_button">write your own</button>
+        <button name="name" class="write_button">vote</button>
     </form>
     <input type="hidden" id="id_num_statements" value=<?php echo $num3; ?>>
 </body>

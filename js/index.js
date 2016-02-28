@@ -4,7 +4,7 @@ $(document).ready(function() {
 		$(".flow_text").each(function() {
 			$(this).css("display", "none");
 		})
-		$("#flow_text" + count.toString()).css("display", "block");
+		$("#flow_text" + count.toString()).css("display", "inline-block");
 		count += 1;
 		if (count == $("#id_num_statements").val()) count = 0;
 	}, 2000);

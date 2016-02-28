@@ -26,7 +26,7 @@ button {
 #text_wrap {
     text-align: left;
     max-width: 80%;
-    height: 75%;
+    height: 70%;
     padding: 7.5% 10% 0 10%;
     font-size: 75px;
     color: #FFF;
@@ -34,6 +34,14 @@ button {
 }
 .flow_text {
     word-wrap: break-word;
+    display: inline-block;
+    background: #FFF;
+    margin-top: 10px;
+    min-width: 40%;
+    color: #000;
+    text-shadow: none;
+    opacity: 0.85;
+    padding: 0 0 0 10px;
 }
 
 #blinker{
@@ -50,7 +58,7 @@ button {
     100% { opacity: 1.0; }
 }
 
-#write_button {
+.write_button {
     color: #000;
     font-size: 15px;
     height: 50px;
@@ -60,5 +68,12 @@ button {
     border: 1px solid #000;
     border-radius: 5px;
     bottom: 5%;
+    display: inline-block;
     text-align: center;
+    transition: all 0.3s ease-out 0s;
+}
+.write_button:hover {
+    background: #333;
+    border: 1px solid #FFF;
+    color: #FFF;
 }
