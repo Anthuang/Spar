@@ -82,3 +82,9 @@ body {
     line-height: 75px;
     text-align: center;
 }
+.green_score {
+    color: green;
+}
+.red_score {
+    color: red;
+}
