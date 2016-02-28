@@ -13,6 +13,9 @@ body {
 button {
     outline: none;
 }
+#category_wrap form {
+    display: inline-block;
+}
 #outer_wrap {
     width: 80%;
     margin: 0 auto;
@@ -68,6 +71,7 @@ button {
 
 #set_image {
     position: absolute;
+    z-index: 5;
     top: 1%;
     right: 1%;
     width: 100px;
@@ -83,6 +87,7 @@ button {
     border: 1px solid #FFF;
 }
 #set_image_input {
+    z-index: 5;
     position: absolute;
     top: 40px;
     right: 1%;
@@ -110,6 +115,7 @@ button {
     font-size: 30px;
     margin-top: 20px;
     opacity: 0.9;
+    box-shadow: 0 0 10px #000;
 }
 #input_submit {
     padding: 0;
@@ -173,6 +179,11 @@ button {
     transition: all 0.2s linear 0s;
 }
 .category_button:hover {
+    background: #000;
+    color: #FFF;
+    border: 1px solid #FFF;
+}
+.category_pressed {
     background: #000;
     color: #FFF;
     border: 1px solid #FFF;
