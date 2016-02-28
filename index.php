@@ -8,7 +8,8 @@
 <body>
     <div id="text_wrap">
         <div id="static_text">Thomas <br> Huang is</div>
-        <div id="flow_text">a baaaaaaaaaaaaaaaaaaaaaaaaaaaa sheep<span id="blinker">|</span></div>
+        <div id="flow_text">a barack sheep<span id="blinker">|</span></div>
     </div>
+    <a href="form.php"><button id="write_button">write your own</button></a>
 </body>
 </html>
